@@ -9,11 +9,16 @@
   "headers": {
     "Authorization": "Bearer {token}"
   },
+  "baseUrl": "https://api.animeonsen.xyz/v4",
+  "searchBaseUrl": "https://api.animeonsen.xyz/v4/search/%s",
+  "scriptUrl": "https://raw.githubusercontent.com/bmob222/SearchModules/main/AnimeOnsen/AnimeOnsen.js",
   "author": {
     "name": "bmob222",
     "url": "https://github.com/bmob222"
   },
   "async": true,
+  "asyncJS": true,
+  "streamAsyncJS": true,
   "hardsubs": false,
   "subtitles": true
 }
