@@ -13,7 +13,7 @@
     "type": "anime",
     "baseUrl": "https://animetsu.cc/",
     "searchBaseUrl": "https://animetsu.cc/search/?q=%s",
-    "scriptUrl": "https://raw.githubusercontent.com/bmob222/SearchModules/blob/main/Gojo/Gojo.js",
+    "scriptUrl": "https://github.com/bmob222/SearchModules/blob/main/Gojo/Gojo.js",
     "asyncJS": true,
     "streamAsyncJS": true,
     "softsub": true
