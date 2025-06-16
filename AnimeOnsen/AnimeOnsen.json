@@ -4,14 +4,18 @@
     "iconUrl": "https://raw.githubusercontent.com/bmob222/SearchModules/main/AnimeOnsen/logo.png",
     "author": {
         "name": "bmob222",
+        "icon": "https://github.com/bmob222.png",
         "url": "https://github.com/bmob222"
     },
     "version": "1.0.0",
     "language": "English",
     "streamType": "DASH",
-    "quality": "1080p",
-    "baseUrl": "https://animeonsen.xyz",
+    "quality": "multi-quality",
+    "type": "anime",
+    "baseUrl": "https://animeonsen.xyz/",
     "searchBaseUrl": "https://api.animeonsen.xyz/v4/search/%s",
     "scriptUrl": "https://raw.githubusercontent.com/bmob222/SearchModules/main/AnimeOnsen/AnimeOnsen.js",
-    "type": "anime"
+    "asyncJS": true,
+    "streamAsyncJS": true,
+    "softsub": true
 }
