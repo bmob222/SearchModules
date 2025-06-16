@@ -1,0 +1,19 @@
+{
+  "name": "AnimeOnsen",
+  "version": "1.0.0",
+  "type": "anime",
+  "iconUrl": "https://raw.githubusercontent.com/bmob222/SearchModules/main/AnimeOnsen/logo.png",
+  "sourceUrl": "https://animeonsen.xyz/",
+  "searchPattern": "api",
+  "lang": ["en"],
+  "headers": {
+    "Authorization": "Bearer {token}"
+  },
+  "author": {
+    "name": "bmob222",
+    "url": "https://github.com/bmob222"
+  },
+  "async": true,
+  "hardsubs": false,
+  "subtitles": true
+}
