@@ -1,0 +1,20 @@
+{
+    "sourceName": "Gojo Search (ENG SUB)",
+    "iconUrl": "https://raw.githubusercontent.com/bmob222/Sora-Modules/main/SearchModules/Gojo/logo.png",
+    "author": {
+        "name": "bmob222",
+        "icon": "https://github.com/bmob222.png",
+        "url": "https://github.com/bmob222"
+    },
+    "version": "1.0.0",
+    "language": "English (HARDSUB)",
+    "streamType": "HLS",
+    "quality": "multi-quality",
+    "type": "anime",
+    "baseUrl": "https://animetsu.cc/",
+    "searchBaseUrl": "https://animetsu.cc/search/?q=%s",
+    "scriptUrl": "https://raw.githubusercontent.com/bmob222/Sora-Modules/main/SearchModules/Gojo/Gojo.js",
+    "asyncJS": true,
+    "streamAsyncJS": true,
+    "softsub": true
+}
