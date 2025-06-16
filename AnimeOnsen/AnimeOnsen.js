@@ -64,7 +64,7 @@ async function getToken() {
 /**
  * Search function (required by Sora)
  * @param {string} query - Search query
- * @returns {Promise<object>} Search results
+ * @returns {Promise<Array>} Search results
  */
 async function searchJS(query) {
     try {
