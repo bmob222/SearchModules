@@ -1,24 +1,25 @@
 {
-    "sourceName": "AnimeOnsen",
-    "sourceId": "animeonsen",
-    "baseUrl": "https://animeonsen.xyz/",
-    "lang": ["en"],
-    "typeTag": "anime",
-    "version": "1.0.0",
-    "date": "2025-06-16",
-    "dev": false,
-    "nsfw": false,
-    "asyncJS": true,
-    "format": {
-        "subtitles": true,
-        "mediaType": "dash",
-        "quality": "auto"
-    },
-    "iconUrl": "https://raw.githubusercontent.com/bmob222/SearchModules/main/AnimeOnsen/logo.png",
-    "searchUrl": "https://api.animeonsen.xyz/v4/search/",
-    "scriptUrl": "https://raw.githubusercontent.com/bmob222/SearchModules/main/AnimeOnsen/AnimeOnsen.js",
-    "author": {
-        "name": "bmob222",
-        "url": "https://github.com/bmob222"
-    }
+  "sourceName": "AnimeOnsen",
+  "sourceId": "animeonsen",
+  "baseUrl": "https://animeonsen.xyz/",
+  "apiUrl": "https://api.animeonsen.xyz/v4",
+  "iconUrl": "https://raw.githubusercontent.com/bmob222/SearchModules/main/AnimeOnsen/logo.png",
+  "lang": ["en"],
+  "typeTag": "anime",
+  "version": "1.0.0",
+  "date": "2025-06-16",
+  "dev": false,
+  "nsfw": false,
+  "asyncJSF": true,
+  "searchJSF": true,
+  "streamJSF": true,
+  "format": {
+    "subtitles": true,
+    "mediaType": "dash",
+    "quality": "multi"
+  },
+  "author": {
+    "name": "bmob222",
+    "url": "https://github.com/bmob222"
+  }
 }
