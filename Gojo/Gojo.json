@@ -1,19 +1,20 @@
 {
-    "sourceName": "Gojo Search (ENG SUB)",
-    "iconUrl": "https://github.com/bmob222/SearchModules/blob/main/Gojo/logo.png",
+    "sourceName": "AnimeOnsen",
+    "sourceId": "animeonsen",
+    "iconUrl": "https://raw.githubusercontent.com/bmob222/SearchModules/main/AnimeOnsen/logo.png",
     "author": {
         "name": "bmob222",
         "icon": "https://github.com/bmob222.png",
         "url": "https://github.com/bmob222"
     },
     "version": "1.0.0",
-    "language": "English (HARDSUB)",
-    "streamType": "HLS",
+    "language": "English",
+    "streamType": "DASH",
     "quality": "multi-quality",
     "type": "anime",
-    "baseUrl": "https://animetsu.cc/",
-    "searchBaseUrl": "https://animetsu.cc/search/?q=%s",
-    "scriptUrl": "https://github.com/bmob222/SearchModules/blob/main/Gojo/Gojo.js",
+    "baseUrl": "https://animeonsen.xyz/",
+    "searchBaseUrl": "https://api.animeonsen.xyz/v4/search/%s",
+    "scriptUrl": "https://raw.githubusercontent.com/bmob222/SearchModules/main/AnimeOnsen/AnimeOnsen.js",
     "asyncJS": true,
     "streamAsyncJS": true,
     "softsub": true
