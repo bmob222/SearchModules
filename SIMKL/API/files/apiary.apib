@@ -1,0 +1,435 @@
+FORMAT: 1A
+HOST: https://api.simkl.com
+
+# SIMKL API Documentation
+
+The SIMKL API provides access to anime, TV shows, and movies database with tracking, search, and user interaction capabilities.
+
+## Authentication
+
+The SIMKL API uses OAuth 2.0 for authentication. You'll need to register your application to get client credentials.
+
+### OAuth Flow
+1. Register application at https://simkl.com/settings/developer
+2. Get authorization code from user
+3. Exchange code for access token
+4. Use access token for API requests
+
+## Base URL
+All API requests should be made to: `https://api.simkl.com`
+
+## Rate Limiting
+- 1000 requests per hour for authenticated requests
+- 100 requests per hour for unauthenticated requests
+
+---
+
+# Group Authentication
+
+## Get Access Token [POST /oauth/token]
+
+Exchange authorization code for access token.
+
++ Request (application/json)
+    + Headers
+            Content-Type: application/json
+    + Body
+            {
+                "code": "authorization_code_here",
+                "client_id": "your_client_id",
+                "client_secret": "your_client_secret",
+                "redirect_uri": "your_redirect_uri",
+                "grant_type": "authorization_code"
+            }
+
++ Response 200 (application/json)
+    + Body
+            {
+                "access_token": "access_token_here",
+                "token_type": "Bearer",
+                "scope": "public"
+            }
+
+---
+
+# Group Search
+
+## Search Movies/TV Shows/Anime [GET /search/{type}]
+
+Search for content by title.
+
++ Parameters
+    + type (required, string) - Content type: `movie`, `show`, `anime`
+    + q (required, string) - Search query
+    + limit (optional, number) - Number of results (default: 20, max: 50)
+
++ Request
+    + Headers
+            Authorization: Bearer access_token_here
+            Content-Type: application/json
+            simkl-api-key: your_api_key
+
++ Response 200 (application/json)
+    + Body
+            [
+                {
+                    "title": "Attack on Titan",
+                    "year": 2013,
+                    "ids": {
+                        "simkl": 8691,
+                        "imdb": "tt2560140",
+                        "tmdb": 1429,
+                        "anidb": 9541,
+                        "anilist": 16498,
+                        "mal": 16498
+                    },
+                    "poster": "https://simkl.in/posters/8691_m.jpg",
+                    "fanart": "https://simkl.in/fanart/8691_medium.jpg",
+                    "first_aired": "2013-04-07",
+                    "total_episodes": 25,
+                    "status": "ended",
+                    "genres": ["Action", "Drama", "Fantasy"],
+                    "overview": "Humanity fights for survival against giant humanoid Titans.",
+                    "rating": 9.0,
+                    "votes": 45236,
+                    "runtime": 24,
+                    "country": "jp",
+                    "network": "MBS",
+                    "trailer": "https://youtube.com/watch?v=...",
+                    "anime_type": "tv"
+                }
+            ]
+
+---
+
+# Group Content Details
+
+## Get Content Details [GET /{type}/{id}]
+
+Get detailed information about specific content.
+
++ Parameters
+    + type (required, string) - Content type: `movies`, `shows`, `anime`
+    + id (required, number) - SIMKL ID of the content
+
++ Request
+    + Headers
+            Authorization: Bearer access_token_here
+            Content-Type: application/json
+            simkl-api-key: your_api_key
+
++ Response 200 (application/json)
+    + Body
+            {
+                "title": "Attack on Titan",
+                "year": 2013,
+                "ids": {
+                    "simkl": 8691,
+                    "imdb": "tt2560140",
+                    "tmdb": 1429,
+                    "anidb": 9541,
+                    "anilist": 16498,
+                    "mal": 16498
+                },
+                "poster": "https://simkl.in/posters/8691_m.jpg",
+                "fanart": "https://simkl.in/fanart/8691_medium.jpg",
+                "first_aired": "2013-04-07",
+                "last_aired": "2023-11-04",
+                "total_episodes": 25,
+                "aired_episodes": 25,
+                "status": "ended",
+                "genres": ["Action", "Drama", "Fantasy"],
+                "overview": "Humanity fights for survival against giant humanoid Titans that have brought humanity to the brink of extinction.",
+                "rating": 9.0,
+                "votes": 45236,
+                "runtime": 24,
+                "country": "jp",
+                "network": "MBS",
+                "trailer": "https://youtube.com/watch?v=...",
+                "anime_type": "tv",
+                "episodes": [
+                    {
+                        "episode": 1,
+                        "title": "To You, in 2000 Years: The Fall of Shiganshina, Part 1",
+                        "description": "After 100 years of peace, humanity faces a new threat.",
+                        "aired": "2013-04-07",
+                        "runtime": 24,
+                        "ids": {
+                            "simkl": 869101
+                        }
+                    }
+                ]
+            }
+
+## Get Episodes [GET /{type}/{id}/episodes]
+
+Get episode list for a show or anime.
+
++ Parameters
+    + type (required, string) - Content type: `shows` or `anime`
+    + id (required, number) - SIMKL ID of the content
+
++ Request
+    + Headers
+            Authorization: Bearer access_token_here
+            Content-Type: application/json
+            simkl-api-key: your_api_key
+
++ Response 200 (application/json)
+    + Body
+            [
+                {
+                    "episode": 1,
+                    "title": "To You, in 2000 Years: The Fall of Shiganshina, Part 1",
+                    "description": "After 100 years of peace, humanity faces a new threat.",
+                    "aired": "2013-04-07",
+                    "runtime": 24,
+                    "ids": {
+                        "simkl": 869101,
+                        "imdb": "tt2707832",
+                        "tmdb": 63055
+                    }
+                },
+                {
+                    "episode": 2,
+                    "title": "That Day: The Fall of Shiganshina, Part 2",
+                    "description": "Eren vows to eliminate every Titan.",
+                    "aired": "2013-04-14",
+                    "runtime": 24,
+                    "ids": {
+                        "simkl": 869102,
+                        "imdb": "tt2707834",
+                        "tmdb": 63056
+                    }
+                }
+            ]
+
+---
+
+# Group User Library
+
+## Get User Watching [GET /sync/all-items/{type}/watching]
+
+Get user's currently watching content.
+
++ Parameters
+    + type (required, string) - Content type: `movies`, `shows`, `anime`
+
++ Request
+    + Headers
+            Authorization: Bearer access_token_here
+            Content-Type: application/json
+            simkl-api-key: your_api_key
+
++ Response 200 (application/json)
+    + Body
+            [
+                {
+                    "last_watched_at": "2024-01-15T10:30:00Z",
+                    "seasons": [
+                        {
+                            "number": 1,
+                            "episodes": [
+                                {
+                                    "number": 5,
+                                    "watched_at": "2024-01-15T10:30:00Z"
+                                }
+                            ]
+                        }
+                    ],
+                    "show": {
+                        "title": "Attack on Titan",
+                        "year": 2013,
+                        "ids": {
+                            "simkl": 8691
+                        }
+                    }
+                }
+            ]
+
+## Add to Watching [POST /sync/history]
+
+Mark content as watched or add to watching list.
+
++ Request (application/json)
+    + Headers
+            Authorization: Bearer access_token_here
+            Content-Type: application/json
+            simkl-api-key: your_api_key
+    + Body
+            {
+                "shows": [
+                    {
+                        "ids": {
+                            "simkl": 8691
+                        },
+                        "seasons": [
+                            {
+                                "number": 1,
+                                "episodes": [
+                                    {
+                                        "number": 1,
+                                        "watched_at": "2024-01-15T10:30:00Z"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "movies": [
+                    {
+                        "ids": {
+                            "simkl": 12345
+                        },
+                        "watched_at": "2024-01-15T10:30:00Z"
+                    }
+                ]
+            }
+
++ Response 201 (application/json)
+    + Body
+            {
+                "added": {
+                    "shows": 1,
+                    "seasons": 1,
+                    "episodes": 1,
+                    "movies": 1
+                },
+                "existing": {
+                    "shows": 0,
+                    "seasons": 0,
+                    "episodes": 0,
+                    "movies": 0
+                },
+                "not_found": {
+                    "shows": [],
+                    "seasons": [],
+                    "episodes": [],
+                    "movies": []
+                }
+            }
+
+---
+
+# Group Trending & Popular
+
+## Get Trending [GET /{type}/trending]
+
+Get trending content.
+
++ Parameters
+    + type (required, string) - Content type: `movies`, `shows`, `anime`
+    + limit (optional, number) - Number of results (default: 10, max: 50)
+
++ Request
+    + Headers
+            Content-Type: application/json
+            simkl-api-key: your_api_key
+
++ Response 200 (application/json)
+    + Body
+            [
+                {
+                    "rank": 1,
+                    "title": "Attack on Titan",
+                    "year": 2013,
+                    "ids": {
+                        "simkl": 8691
+                    },
+                    "poster": "https://simkl.in/posters/8691_m.jpg",
+                    "watchers": 12847
+                }
+            ]
+
+## Get Popular [GET /{type}/popular]
+
+Get popular content.
+
++ Parameters
+    + type (required, string) - Content type: `movies`, `shows`, `anime`
+    + limit (optional, number) - Number of results (default: 10, max: 50)
+
++ Request
+    + Headers
+            Content-Type: application/json
+            simkl-api-key: your_api_key
+
++ Response 200 (application/json)
+    + Body
+            [
+                {
+                    "rank": 1,
+                    "title": "Attack on Titan",
+                    "year": 2013,
+                    "ids": {
+                        "simkl": 8691
+                    },
+                    "poster": "https://simkl.in/posters/8691_m.jpg",
+                    "watchers": 45236
+                }
+            ]
+
+---
+
+# Group Recommendations
+
+## Get Recommendations [GET /sync/recommendations/{type}]
+
+Get personalized recommendations based on user's watch history.
+
++ Parameters
+    + type (required, string) - Content type: `movies`, `shows`, `anime`
+    + limit (optional, number) - Number of results (default: 10, max: 50)
+
++ Request
+    + Headers
+            Authorization: Bearer access_token_here
+            Content-Type: application/json
+            simkl-api-key: your_api_key
+
++ Response 200 (application/json)
+    + Body
+            [
+                {
+                    "title": "Demon Slayer",
+                    "year": 2019,
+                    "ids": {
+                        "simkl": 347060
+                    },
+                    "poster": "https://simkl.in/posters/347060_m.jpg",
+                    "rating": 8.7,
+                    "genres": ["Action", "Supernatural"],
+                    "reason": "Because you watched Attack on Titan"
+                }
+            ]
+
+---
+
+# Data Structures
+
+## Content Object
++ title (string) - Title of the content
++ year (number) - Release year
++ ids (object) - External IDs (simkl, imdb, tmdb, anidb, anilist, mal)
++ poster (string) - Poster image URL
++ fanart (string) - Fanart image URL
++ first_aired (string) - First air date (ISO 8601)
++ total_episodes (number) - Total number of episodes
++ status (string) - Status: ended, continuing, upcoming, canceled
++ genres (array) - Array of genre strings
++ overview (string) - Content description
++ rating (number) - User rating (0-10)
++ votes (number) - Number of votes
++ runtime (number) - Episode/movie runtime in minutes
++ country (string) - Country code
++ network (string) - Network/studio name
++ trailer (string) - Trailer URL
++ anime_type (string) - For anime: tv, movie, special, ova, ona
+
+## Episode Object
++ episode (number) - Episode number
++ title (string) - Episode title
++ description (string) - Episode description
++ aired (string) - Air date (ISO 8601)
++ runtime (number) - Episode runtime in minutes
++ ids (object) - External IDs

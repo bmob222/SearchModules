@@ -1,0 +1,52 @@
+{
+    "name": "SIMKL",
+    "author": "bmob222",
+    "version": "1.0.0",
+    "description": "SIMKL anime tracking and metadata provider for Sora",
+    "baseURL": "https://api.simkl.com",
+    "requiresAuth": true,
+    "authType": "oauth2",
+    "features": [
+        "search",
+        "details",
+        "episodes",
+        "tracking",
+        "recommendations",
+        "trending"
+    ],
+    "contentTypes": [
+        "anime",
+        "shows", 
+        "movies"
+    ],
+    "externalIds": [
+        "anilist",
+        "mal",
+        "imdb",
+        "tmdb",
+        "anidb"
+    ],
+    "rateLimit": {
+        "authenticated": "1000/hour",
+        "unauthenticated": "100/hour"
+    },
+    "endpoints": {
+        "search": "/search/{type}",
+        "details": "/{type}/{id}",
+        "episodes": "/{type}/{id}/episodes", 
+        "trending": "/{type}/trending",
+        "popular": "/{type}/popular",
+        "userWatching": "/sync/all-items/{type}/watching",
+        "markWatched": "/sync/history"
+    },
+    "configuration": {
+        "required": [
+            "SIMKL_CLIENT_ID",
+            "SIMKL_CLIENT_SECRET", 
+            "SIMKL_API_KEY"
+        ],
+        "optional": [
+            "SIMKL_REDIRECT_URI"
+        ]
+    }
+}
